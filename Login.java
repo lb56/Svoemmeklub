@@ -3,24 +3,29 @@ import java.io.*;
 
 public class Login{
    
-   //Member member = new Member();
-   String[] staff = new String[3];
-   int[] staffPass = new int[3];
+   // Making arraylists
    ArrayList<String> readPass = new ArrayList<String>();
-
+   ArrayList<String> members = new ArrayList<String>();
+   ArrayList<Double> times = new ArrayList<Double>();
+   Member member = new Member();
+   
+   // startMenu method
    public void startMenuPrompt() throws IOException {
       // Making scanner, file and printstream objects
       Scanner console = new Scanner(System.in);
       Scanner in = new Scanner(new File("password.txt"));
-      PrintStream out = new PrintStream(new File("members.txt"));      
-      
-      boolean run = true;
-      
-      while(in.hasNext()) {
-         for (int i = 0; i <= 2; i++) {
-            readPass.add(in.nextLine());
-         }
+      Scanner inmem = new Scanner(new File("members.txt"));
+      PrintStream out = new PrintStream(new FileOutputStream("members.txt", true));  
+      //PrintStream outTime = new PrintStream(new FileOutputStream("times.txt", true));      
+      // Adding passwords to readPass arraylist
+      while (in.hasNext()) {
+         readPass.add(in.nextLine());
       }
+      // Saving members to members arraylist
+      while (inmem.hasNextLine()) {
+         members.add(inmem.nextLine());             
+      }
+      
       boolean running = true;
       while(running) {
          System.out.println("******* Welcome to Delphine Swimming Club ******* " + "\n");
@@ -38,14 +43,21 @@ public class Login{
                System.out.println("1: Register a user");
                System.out.println("2: Change user information");
                System.out.println("0: Go back to login menu \n");
-               
                int chairInput = getInt("Please enter a number between 0 - 2.", 0, 2);
                switch(chairInput) {
+                  // Register user
                   case 1:
                      System.out.println("Enter the name of the swimmer:");
                      String name = console.nextLine();
                      System.out.println("Enter the age of the swimmer:");
                      int age = console.nextInt();
+                     // The system registers the age category of the swimmer
+                     String ageCategory = "";
+                     if (age < 18) {
+                        ageCategory = "Ungdomssvømmer";
+                     } else {
+                        ageCategory = "Seniorsvømmer";
+                     }
                      System.out.println("Enter the sex of the swimmer (M/F):");
                      char sex = console.next().charAt(0);
                      System.out.println("Enter the activity of the swimmer (Active/Passive):");
@@ -54,17 +66,11 @@ public class Login{
                      String swimmingCategory = console.next();
                      System.out.println("Enter the swimming discipline of the swimmer:");
                      String swimmingDiscipline = console.next();
-                     // The system registers the age category of the swimmer
-                     String ageCategory = "";
-                     if (age < 18) {
-                        ageCategory = "Ungdomssvømmer";
-                     } else {
-                        ageCategory = "Seniorsvømmer";
-                     }
                      // Calling the constructor of Member
-                     Member member = new Member(name, age, sex, activity, ageCategory, swimmingCategory, swimmingDiscipline);
+                     Member member = new Member(name, age, sex, activity, ageCategory, swimmingCategory, swimmingDiscipline);                  
                      // Writing the member to a file
-                     out.print(member);
+                     out.println(member);
+                     out.close();
                      break;                     
                   case 0:
                      running = false; 
@@ -82,9 +88,17 @@ public class Login{
                int trainerInput = getInt("Please enter a number between 0 - 2.", 0, 2);
                switch(trainerInput) {
                   case 1:
-                     System.out.println("Choose a member from the list: ");
-                     ;
-                  
+                     System.out.println("Choose a member from the list:");
+                     for (int i = 0; i < members.size(); i++) {
+                        System.out.println((i + 1) + ": " + members.get(i));
+                     }
+                     int trainerInput2 = getInt("Please pick a swimmer between number 1 - " + members.size(), 1, members.size());                    
+                     System.out.println("Enter the time of the swimmer: ");
+                     String timeInput = console.next();
+                     String name = "Dennis";
+                     PrintStream outTime = new PrintStream(new FileOutputStream(name + "times.txt", true));
+                     //outTime.println(timeInput);
+                                     
                   case 0:
                      running = false;
                      break;
@@ -123,10 +137,10 @@ public class Login{
    
    public void adminLogin(int n, String name) {
       Scanner console = new Scanner(System.in);
-      System.out.println("Welcome " + name + ", please enter your password");
+      System.out.println("Please enter your password");
       while (true) {
-         String sinput = console.next();        
-         if(sinput.equals(readPass.get(n))) {
+         String input = console.next();        
+         if(input.equals(readPass.get(n))) {
             System.out.println("Welcome, " + name + "\n");
             break;
          } else {

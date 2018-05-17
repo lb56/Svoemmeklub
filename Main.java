@@ -3,9 +3,8 @@ import java.io.*;
 
 public class Main{
    public static void main(String[] args) throws IOException {
-       //MembersList memberList = new MembersList();
+       Scanner newscan = new Scanner(new File("members.txt"));
        Login login = new Login();
-       //memberList.printMember();
-       login.startMenuPrompt();
+       login.startMenuPrompt();   
    }
 }

@@ -1,18 +1,11 @@
 import java.util.*;
+import java.io.*;
 
-public class MembersList{
+public class MembersList extends Member {
+
+   Scanner in = new Scanner(new File("members.txt"));
 
    ArrayList<Member> members = new ArrayList<Member>();
+   List<String> names = new ArrayList<String>();
    
-   public void printMember() {
-      members.add(new Member("Anna", 18, "F", "Competition", "Senior", "Fish", "None"));
-      members.add(new Member("Pia", 15, "F", "Competition", "Junior", "Fish", "None"));
-      for(Member s: members) {
-         System.out.println(s);
-      }
-      
-   }
-      
-         
-
 }

@@ -6,7 +6,7 @@ public class Member{
    private String activity;
    private String ageCategory;
    private String swimmingCategory;
-   private String swimmingDiscipline; //(alt)
+   private String swimmingDiscipline;
 
    public Member(String name, int age, char sex, String activity, String ageCategory, String swimmingCategory, String swimmingDiscipline){               
       this.name = name;
@@ -49,15 +49,8 @@ public class Member{
       return swimmingCategory;
    }
    
-   public String toString(){
-       String minString = "";
-       minString += "Activity: " + activity + "\n";
-       minString += "Navn: " + name + "\n";
-       minString += "Age: " + Integer.toString(age) + "\n";
-       minString += "Age category: " + ageCategory + "\n";
-       minString += "Sex: " + sex + "\n";
-       minString += "Swimming category: " + swimmingCategory + "\n";
-       minString += "Swimming discipline: " + swimmingDiscipline;
+   public String toString() {
+       String minString = (name + " " + age + " " + ageCategory + " " + sex + " " + swimmingCategory + " " + swimmingDiscipline + " " + activity);
        return minString;  
    }
 }
