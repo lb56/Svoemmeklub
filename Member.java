@@ -17,38 +17,7 @@ public class Member{
       this.swimmingCategory = swimmingCategory;
       this.swimmingDiscipline = swimmingDiscipline;
    }
-   
-   public Member() {
-   }
- 
-   public void setAge(int age) {
-      this.age = age;
-   }
-   
-   public void setAgeCategory(String ageCategory){
-      this.ageCategory = ageCategory;
-   }
- 
-   public void setSwimmingCategory(String swimmingCategory){
-      this.swimmingCategory = swimmingCategory;
-   }
- 
-   public void setSwimmingDiscipline(String swimmingDiscipline){
-      this.swimmingDiscipline = swimmingDiscipline;
-   }
- 
-   public String getName() {
-      return name;
-   }
-   
-   public String getActivity(){
-      return activity;
-   }
- 
-   public String getAgeCategory(){
-      return swimmingCategory;
-   }
-   
+     
    public String toString() {
        String minString = (name + " " + age + " " + ageCategory + " " + sex + " " + swimmingCategory + " " + swimmingDiscipline + " " + activity);
        return minString;  
